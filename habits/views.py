@@ -8,6 +8,12 @@ class HabitCreateView(generics.CreateAPIView):
     """Контроллер создания привычки"""
     serializer_class = HabitSerializer
 
+    def perform_create(self, serializer):
+        """Привязываем текущего пользователя к создаваемому объекту"""
+        new_habit = serializer.save()
+        new_habit.user = self.request.user
+        new_habit.save()
+
 
 class HabitDetailView(generics.RetrieveAPIView):
     """Контроллер просмотра привычки"""

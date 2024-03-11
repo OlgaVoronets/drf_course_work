@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 from users.models import NULLABLE
 
@@ -22,12 +23,13 @@ class Habit(models.Model):
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Cоздатель привычки',
-                             related_name='user')
+                             related_name='user', **NULLABLE)
 
     action = models.TextField(verbose_name='Что?')
     place = models.CharField(max_length=150, verbose_name='Где?')
-    time = models.TimeField(verbose_name='Когда?')
-    duration = models.DurationField(verbose_name='Как долго?')
+    start_point = models.DateTimeField(default=timezone.now(), verbose_name='Когда?')
+    duration = models.DurationField(default='00:00',verbose_name='Выполнять чч:мм:сс')
+
     period = models.CharField(max_length=20, verbose_name='Как часто?', choices=PERIOD_CHOICES, default='daily')
 
     is_nice = models.BooleanField(default=False, verbose_name='Приятная')
@@ -41,6 +43,7 @@ class Habit(models.Model):
         return f'{self.period} {self.action}'
 
     class Meta:
-        verbose_name = 'Привычка'
-        verbose_name_plural = 'Привычки'
+        verbose_name = 'привычка'
+        verbose_name_plural = 'привычек'
+        ordering = ('id',)
 
