@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -23,6 +22,7 @@ class UserCreateView(generics.CreateAPIView):
         password = serializer.data["password"]
         user = User.objects.get(pk=serializer.data["id"])
         user.set_password(password)
+        user.is_active = True
         user.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
