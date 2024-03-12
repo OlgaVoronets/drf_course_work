@@ -10,7 +10,7 @@ class HabitListView(generics.ListAPIView):
 
     def get_queryset(self):
         """Фильтруем подборку по признаку публикации"""
-        return Habit.objects.filter(s_published=True)
+        return Habit.objects.filter(is_published=True)
 
 
 class UserHabitListView(generics.ListAPIView):
