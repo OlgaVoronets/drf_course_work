@@ -4,6 +4,24 @@ from habits.models import Habit
 from habits.serializers import HabitSerializer
 
 
+class HabitListView(generics.ListAPIView):
+    """Контроллер просмотра списка опубликованых привычек"""
+    serializer_class = HabitSerializer
+
+    def get_queryset(self):
+        """Фильтруем подборку по признаку публикации"""
+        return Habit.objects.filter(s_published=True)
+
+
+class UserHabitListView(generics.ListAPIView):
+    """Контроллер просмотра списка привычек текущего пользователя"""
+    serializer_class = HabitSerializer
+
+    def get_queryset(self):
+        """Фильтруем подборку по текущему пользователю"""
+        return Habit.objects.filter(user=self.request.user)
+
+
 class HabitCreateView(generics.CreateAPIView):
     """Контроллер создания привычки"""
     serializer_class = HabitSerializer
@@ -29,10 +47,4 @@ class HabitUpdateView(generics.UpdateAPIView):
 
 class HabitDeleteView(generics.DestroyAPIView):
     """Контроллер удаления привычки"""
-    queryset = Habit.objects.all()
-
-
-class HabitListView(generics.ListAPIView):
-    """Контроллер просмотра списка привычек"""
-    serializer_class = HabitSerializer
     queryset = Habit.objects.all()
