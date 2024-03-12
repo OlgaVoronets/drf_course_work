@@ -2,6 +2,25 @@ from rest_framework import generics
 
 from habits.models import Habit
 from habits.serializers import HabitSerializer
+from users.permissions import IsOwner
+
+
+class HabitListView(generics.ListAPIView):
+    """Контроллер просмотра списка опубликованых привычек"""
+    serializer_class = HabitSerializer
+
+    def get_queryset(self):
+        """Фильтруем подборку по признаку публикации"""
+        return Habit.objects.filter(is_published=True)
+
+
+class UserHabitListView(generics.ListAPIView):
+    """Контроллер просмотра списка привычек текущего пользователя"""
+    serializer_class = HabitSerializer
+
+    def get_queryset(self):
+        """Фильтруем подборку по текущему пользователю"""
+        return Habit.objects.filter(user=self.request.user)
 
 
 class HabitCreateView(generics.CreateAPIView):
@@ -19,20 +38,17 @@ class HabitDetailView(generics.RetrieveAPIView):
     """Контроллер просмотра привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
 
 
 class HabitUpdateView(generics.UpdateAPIView):
     """Контроллер редактирования привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
 
 
 class HabitDeleteView(generics.DestroyAPIView):
     """Контроллер удаления привычки"""
     queryset = Habit.objects.all()
-
-
-class HabitListView(generics.ListAPIView):
-    """Контроллер просмотра списка привычек"""
-    serializer_class = HabitSerializer
-    queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
