@@ -186,8 +186,8 @@ CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER_URL')
 CELERY_TIMEZONE = TIME_ZONE
 
 CELERY_BEAT_SCHEDULE = {
-    '': {
-        'task': '',  # Путь к задаче
-        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    'send_tg_reminder': {
+        'task': 'habits.tasks.send_tg_reminder_task',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи (например, каждые 10 минут)
     }
 }
