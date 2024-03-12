@@ -2,6 +2,7 @@ from rest_framework import generics
 
 from habits.models import Habit
 from habits.serializers import HabitSerializer
+from users.permissions import IsOwner
 
 
 class HabitListView(generics.ListAPIView):
@@ -37,14 +38,17 @@ class HabitDetailView(generics.RetrieveAPIView):
     """Контроллер просмотра привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
 
 
 class HabitUpdateView(generics.UpdateAPIView):
     """Контроллер редактирования привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
 
 
 class HabitDeleteView(generics.DestroyAPIView):
     """Контроллер удаления привычки"""
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
