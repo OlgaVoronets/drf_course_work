@@ -11,13 +11,7 @@ class MyBot:
 
     def send_message(self, chat_id, text):
         path = f'{self.URL}/sendMessage'
-        response = requests.post(
-            url=path,
-            data={
-                'chat_id': chat_id,
-                'text': text
-            }
-        )
+        requests.post(url=path, data={'chat_id': chat_id, 'text': text})
 
 
 def change_start_date(habit):

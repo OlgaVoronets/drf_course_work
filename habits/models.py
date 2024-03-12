@@ -29,7 +29,7 @@ class Habit(models.Model):
     place = models.CharField(max_length=150, verbose_name='Где?')
     start_date = models.DateField(default=timezone.now().date(), verbose_name='Когда?')
     time = models.TimeField(default=timezone.now().time(), verbose_name='Во сколько?')
-    duration = models.DurationField(default='00:00:00',verbose_name='Выполнять чч:мм:сс')
+    duration = models.DurationField(default='00:00:00', verbose_name='Выполнять чч:мм:сс')
 
     period = models.CharField(max_length=20, verbose_name='Как часто?', choices=PERIOD_CHOICES, default='daily')
 
@@ -45,6 +45,5 @@ class Habit(models.Model):
 
     class Meta:
         verbose_name = 'привычка'
-        verbose_name_plural = 'привычек'
+        verbose_name_plural = 'привычки'
         ordering = ('id',)
-
