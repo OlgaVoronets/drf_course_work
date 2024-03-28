@@ -1,0 +1,70 @@
+[
+  {
+    "model": "habits.habit",
+    "pk": 16,
+    "fields": {
+      "user": 7,
+      "action": "Полезная привычка утром",
+      "place": "В парке",
+      "start_date": "2024-03-12",
+      "time": "12:51:47.979",
+      "duration": "00:01:40",
+      "period": "daily",
+      "is_nice": false,
+      "is_published": true,
+      "related_habit": null,
+      "reward": null
+    }
+  },
+  {
+    "model": "habits.habit",
+    "pk": 17,
+    "fields": {
+      "user": 7,
+      "action": "Полезная привычка днем",
+      "place": "Дома",
+      "start_date": "2024-03-12",
+      "time": "12:51:47.979",
+      "duration": "00:01:40",
+      "period": "daily",
+      "is_nice": false,
+      "is_published": false,
+      "related_habit": null,
+      "reward": "Съесть мороженое"
+    }
+  },
+  {
+    "model": "habits.habit",
+    "pk": 18,
+    "fields": {
+      "user": 7,
+      "action": "Полезная привычка вечером",
+      "place": "В спортзале",
+      "start_date": "2024-03-12",
+      "time": "12:51:47.979",
+      "duration": "00:01:40",
+      "period": "daily",
+      "is_nice": false,
+      "is_published": false,
+      "related_habit": 19,
+      "reward": null
+    }
+  },
+  {
+    "model": "habits.habit",
+    "pk": 19,
+    "fields": {
+      "user": 7,
+      "action": "Приятная привычка вечером",
+      "place": "Дома",
+      "start_date": "2024-03-12",
+      "time": "12:51:47.979",
+      "duration": "00:02:00",
+      "period": "daily",
+      "is_nice": true,
+      "is_published": false,
+      "related_habit": null,
+      "reward": null
+    }
+  }
+]
